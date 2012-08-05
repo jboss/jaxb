@@ -830,7 +830,7 @@
                       <fileset dir="${runtime-fi.classes}"/>
                       <fileset dir="${runtime-staxex.classes}"/>
                       <fileset dir="${runtime.src}" includes="META-INF/**/*" />
-                      <zipgroupfileset dir="${jaxb.libs.runtime2}" includes="*.jar" />
+                      <!-- <zipgroupfileset dir="${jaxb.libs.runtime2}" includes="*.jar" /> -->
                   </jar>
               </sequential>
 
@@ -881,11 +881,11 @@ Class-Path: ${manifest.classpath}
                        manifest="${xjc.root}/manifest.xjc"
                        duplicate="fail">
                       <!-- can't use zipgroupfileset because of the duplicate LICENSE.txt -->
-                      <fileset dir="${jaxb.root}/build/jaxb-xjc-rejar"/>
+                      <!-- <fileset dir="${jaxb.root}/build/jaxb-xjc-rejar"/> -->
                       <fileset dir="${xjc.classes}"/>
                       <metainf dir="${xjc.src}/META-INF" />
                       <!-- bundle the 1.0 compiler in the side directory -->
-                      <zipfileset dir="${xjc10.classes}/.." />
+                      <!-- <zipfileset dir="${xjc10.classes}/.." /> -->
                   </jar>
                   <delete dir="${jaxb.root}/build/jaxb-xjc-rejar"/>
               </sequential>
@@ -940,6 +940,13 @@ Class-Path: ${manifest.classpath}
         <replace dir="${jaxb.build}" includes="*.pom" token="@API_VERSION@" value="${release.spec.version}"/>
         <replace dir="${jaxb.build}" includes="*.pom" token="@FI_VERSION@" value="${fi.version}"/>
         <replace dir="${jaxb.build}" includes="*.pom" token="@ISTACK_COMMONS_VERSION@" value="${istack-commons.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@CODEMODEL_VERSION@" value="${codemodel.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@DTD_PARSER_VERSION@" value="${dtd-parser.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@RELAXNG_DATATYPE_VERSION@" value="${relaxng-datatype.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@RNGOM_VERSION@" value="${rngom.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@TXW2_VERSION@" value="${txw2.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@XSOM_VERSION@" value="${xsom.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@XML_RESOLVER_VERSION@" value="${resolver.version}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl.jar" pom="build/jaxb-impl.pom"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl.src.zip" pom="build/jaxb-impl.pom" classifier="sources"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl-javadoc.jar" pom="build/jaxb-impl.pom" classifier="javadoc"/>
@@ -963,44 +970,51 @@ Class-Path: ${manifest.classpath}
         <replace dir="${jaxb.build}" includes="*.pom" token="@API_VERSION@" value="${release.spec.version}"/>
         <replace dir="${jaxb.build}" includes="*.pom" token="@FI_VERSION@" value="${fi.version}"/>
         <replace dir="${jaxb.build}" includes="*.pom" token="@ISTACK_COMMONS_VERSION@" value="${istack-commons.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@CODEMODEL_VERSION@" value="${codemodel.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@DTD_PARSER_VERSION@" value="${dtd-parser.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@RELAXNG_DATATYPE_VERSION@" value="${relaxng-datatype.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@RNGOM_VERSION@" value="${rngom.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@TXW2_VERSION@" value="${txw2.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@XSOM_VERSION@" value="${xsom.version}"/>
+        <replace dir="${jaxb.build}" includes="*.pom" token="@XML_RESOLVER_VERSION@" value="${resolver.version}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl.jar" pom="build/jaxb-impl.pom" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl.src.zip" pom="build/jaxb-impl.pom" classifier="sources" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-impl-javadoc.jar" pom="build/jaxb-impl.pom" classifier="javadoc" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
             
         <mvn.publish.remote jar="dist/lib/jaxb-xjc.jar" pom="build/jaxb-xjc.pom" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-xjc.src.zip" pom="build/jaxb-xjc.pom" classifier="sources" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb-xjc-javadoc.jar" pom="build/jaxb-xjc.pom" classifier="javadoc" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
             
         <mvn.publish.remote jar="dist/lib/jaxb1-impl.jar" pom="build/jaxb1-impl.pom" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb1-impl-src.zip" pom="build/jaxb1-impl.pom" classifier="sources" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="dist/lib/jaxb1-impl-javadoc.jar" pom="build/jaxb1-impl.pom" classifier="javadoc" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
 
         <mvn.publish.remote jar="${osgi.build}/jaxb-osgi.jar" pom="build/jaxb-osgi.pom" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="${osgi.build}/jaxb-osgi-sources.jar" pom="build/jaxb-osgi.pom" classifier="sources" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
         <mvn.publish.remote jar="${osgi.build}/jaxb-osgi-javadoc.jar" pom="build/jaxb-osgi.pom" classifier="javadoc" 
-            repo="https://maven.java.net/service/local/staging/deploy/maven2/" repoid="jvnet-nexus-staging" command="gpg:sign-and-deploy-file"
+            repo="https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/" repoid="jboss-releases-repository" command="gpg:sign-and-deploy-file"
             password="${gpg.password}"/>
     </target>
     

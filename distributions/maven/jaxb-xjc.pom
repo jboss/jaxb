@@ -101,4 +101,46 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.codemodel</groupId>
+            <artifactId>codemodel</artifactId>
+            <version>@CODEMODEL_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.dtd-parser</groupId>
+            <artifactId>dtd-parser</artifactId>
+            <version>@DTD_PARSER_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.istack</groupId>
+            <artifactId>istack-commons-tools</artifactId>
+            <version>@ISTACK_COMMONS_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.relaxng</groupId>
+            <artifactId>relaxngDatatype</artifactId>
+            <version>@RELAXNG_DATATYPE_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke.rngom</groupId>
+            <artifactId>rngom</artifactId>
+            <version>@RNGOM_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xsom</groupId>
+            <artifactId>xsom</artifactId>
+            <version>@XSOM_VERSION@</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-resolver</groupId>
+            <artifactId>xml-resolver</artifactId>
+            <version>@XML_RESOLVER_VERSION@</version>
+         </dependency>
+    </dependencies>
+
 </project>

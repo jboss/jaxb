@@ -111,4 +111,20 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.istack</groupId>
+            <artifactId>istack-commons-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.txw2</groupId>
+            <artifactId>txw2</artifactId>
+            <version>@TXW2_VERSION@</version>
+        </dependency>
+    </dependencies>
+
 </project>
