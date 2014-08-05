@@ -536,6 +536,8 @@ public final class UnmarshallingContext extends Coordinator
                 target = intercepter.intercept(current,target);
             if(recv!=null)
                 recv.receive(current,target);
+
+            current.nil = false;
         } finally {
             popCoordinator();
         }
