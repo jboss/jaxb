@@ -39,3 +39,8 @@
 
 Two words. "ant dist"
 
+## Performing a release to the JBoss Maven Repository ##
+1. ant clean
+2. Update the release.impl.version in build.properties
+3. ant push-release-to-maven
+

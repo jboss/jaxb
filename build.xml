@@ -961,7 +961,9 @@ Class-Path: ${manifest.classpath}
         <mvn.publish.remote jar="${osgi.build}/jaxb-osgi-javadoc.jar" pom="build/jaxb-osgi.pom" classifier="javadoc"/>
     </target>
 
-    <target name="push-release-to-maven">
+    <target name="push-release-to-maven" depends="dist-zip-with-src">
+        <ant dir="${osgi.root}" target="dist"/>
+
         <delete dir="${jaxb.build}" includes="*.pom"/>
         <copy todir="${jaxb.build}">
             <fileset dir="distributions/maven"/>
