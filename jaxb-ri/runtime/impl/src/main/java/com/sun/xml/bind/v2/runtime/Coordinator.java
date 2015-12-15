@@ -129,10 +129,7 @@ public abstract class Coordinator implements ErrorHandler, ValidationEventHandle
      * Called whenever an execution flow exits the realm of this {@link Coordinator}.
      */
     protected final void popCoordinator() {
-        if (old != null)
-            activeTable.set(old);
-        else
-            activeTable.remove();
+        activeTable.set(old);
         old = null; // avoid memory leak
     }
 
