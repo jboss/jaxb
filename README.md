@@ -17,3 +17,8 @@ or have questions, ask at our user forum: <a href="mailto:users@metro.java.net">
 * http://java.net/jira/browse/JAXB
 * http://java.net/jira/browse/JAX_WS
 * http://java.net/jira/browse/WSIT
+
+### JBoss additions
+
+The project is released to JBoss Nexus repository as follows (JDK 1.7 required to avoid javadoc issues):
+> mvn source:jar deploy -Psources-profile -DskipTests -DaltDeploymentRepository=jboss-releases-repository::default::https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/
