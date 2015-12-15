@@ -88,9 +88,9 @@ holder.
     </developers>
 
     <scm>
-        <connection>scm:git:git://java.net/jaxb~v2</connection>
-        <developerConnection>scm:git:ssh://git.java.net/jaxb~v2</developerConnection>
-        <url>http://java.net/projects/jaxb/sources/v2/show</url>
+        <connection>scm:git:https://github.com/jboss/jaxb.git</connection>
+        <developerConnection>scm:git:https://github.com/jboss/jaxb.git</developerConnection>
+        <url>https://github.com/jboss/jaxb.git</url>
     </scm>
 
     <issueManagement>
