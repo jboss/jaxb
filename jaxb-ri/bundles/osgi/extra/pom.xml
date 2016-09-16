@@ -121,13 +121,6 @@ holder.
                 </executions>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <useDefaultManifestFile>true</useDefaultManifestFile>
-                </configuration>
-            </plugin>
-
             <!--    Can be used to build everything from sources
                         <plugin>
                             <groupId>org.glassfish.build</groupId>

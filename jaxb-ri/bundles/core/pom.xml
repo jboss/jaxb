@@ -168,12 +168,6 @@ holder.
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <useDefaultManifestFile>true</useDefaultManifestFile>
-                </configuration>
-            </plugin>
             <plugin> <!-- want to unpack sources from individual modules -->
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>

@@ -151,6 +151,8 @@ holder.
         <findbugs.version>2.5.2</findbugs.version>
         <skipSources>true</skipSources>
         <netbeans.hint.jdkPlatform>JDK_1.6</netbeans.hint.jdkPlatform>
+        <modular.jdk.args/>
+        <surefire.system.args>${modular.jdk.args} -ea -Duser.region=US -Duser.language=en </surefire.system.args>
     </properties>
 
     <dependencyManagement>
@@ -179,14 +181,6 @@ holder.
                 <version>1.0.8</version>
                 <scope>test</scope>
             </dependency>
-            <!-- JDK dependencies -->
-            <dependency>
-                <groupId>com.sun</groupId>
-                <artifactId>tools</artifactId>
-                <version>1.6</version>
-                <scope>system</scope>
-                <systemPath>${tools.jar}</systemPath>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -195,18 +189,18 @@ holder.
             <plugins>
                 <plugin>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>2.0</version>
+                    <version>2.4.3</version>
                     <configuration>
                         <createDependencyReducedPom>false</createDependencyReducedPom>
                     </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.4.1</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <escapeString>\</escapeString>
                     </configuration>
@@ -224,7 +218,7 @@ holder.
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.0.2</version>
                     <configuration>
                         <archive>
                             <manifestEntries>
@@ -266,11 +260,22 @@ holder.
                     </executions>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.5.1</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
+                        <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                        <enableAssertions>true</enableAssertions>
+                        <argLine>${surefire.system.args}</argLine>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
                         <fork>true</fork>
                         <compilerArguments>
                             <endorseddirs>${endorsed.dir}</endorseddirs>
@@ -280,7 +285,7 @@ holder.
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>3.0.0</version>
                     <configuration>
                         <archive>
                             <manifestEntries>
@@ -301,7 +306,19 @@ holder.
                 </plugin>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.3</version>
+                    <version>2.6</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-archiver</artifactId>
+                            <version>3.3</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-io</artifactId>
+                            <version>2.7.1</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
                         <archive>
                             <manifestEntries>
@@ -322,7 +339,7 @@ holder.
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.8.1</version>
+                    <version>2.10.4</version>
                     <configuration>
                         <aggregate>false</aggregate>
                         <dependencySourceExcludes>
@@ -344,7 +361,7 @@ holder.
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.8</version>
+                    <version>1.9.1</version>
                     <executions>
                         <execution>
                             <id>jaxb.version</id>
@@ -471,7 +488,7 @@ holder.
             </plugin>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.4.1</version>
                 <executions>
                     <execution>
                         <id>enforce-versions</id>
@@ -660,17 +677,6 @@ holder.
             </properties>
         </profile>
         <profile>
-            <id>default-tools.jar-mac</id>
-            <activation>
-                <file>
-                    <exists>${java.home}/../Classes/classes.jar</exists>
-                </file>
-            </activation>
-            <properties>
-                <tools.jar>${java.home}/../Classes/classes.jar</tools.jar>
-            </properties>
-        </profile>
-        <profile>
             <id>default-rt.jar</id>
             <activation>
                 <file>
@@ -681,16 +687,20 @@ holder.
                 <rt.jar>${java.home}/../jre/lib/rt.jar</rt.jar>
             </properties>
         </profile>
-        <profile>       <!--todo: remove me-->
-            <id>default-rt.jar-mac</id>
+        <profile>
+            <id>tools-jar</id>
             <activation>
-                <file>
-                    <exists>${java.home}/../Classes/classes.jar</exists>
-                </file>
+                <jdk>[1.7,1.8]</jdk>
             </activation>
-            <properties>
-                <rt.jar>${java.home}/../Classes/classes.jar</rt.jar>
-            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>1.8</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>dev-impl</id>
@@ -807,6 +817,35 @@ holder.
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>java9</id>
+            <activation>
+                <jdk>9</jdk>
+            </activation>
+            <properties>
+                <!-- [WFCORE-1431] remove SASL workaround -->
+                <modular.jdk.args>--add-modules java.activation
+                </modular.jdk.args>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.5.1</version>
+                        <configuration>
+                            <!-- fork is needed so compiler args can be used -->
+                            <fork>true</fork>
+                            <compilerArgs>
+                                <arg>-J--add-modules</arg>
+                                <arg>-Jjava.annotations.common</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </plugin>
+
                 </plugins>
             </build>
         </profile>

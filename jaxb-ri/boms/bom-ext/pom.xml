@@ -94,6 +94,12 @@
                 <groupId>com.sun.istack</groupId>
                 <artifactId>istack-commons-tools</artifactId>
                 <version>${istack.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.ant</groupId>
