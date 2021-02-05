@@ -84,7 +84,7 @@
     <dependency><!-- for Ant task -->
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.7.0</version>
+      <version>1.10.9</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
